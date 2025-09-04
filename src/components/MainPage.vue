@@ -7,7 +7,8 @@
       <v-text-field label="plasmid" v-model="labelModel.plasmid" density="compact"></v-text-field>
       <v-text-field label="Protein batch" v-model="labelModel.protein_batch" density="compact"></v-text-field>
       <v-text-field label="protein conc. (µM)" v-model="labelModel.protein_conc_uM" density="compact"></v-text-field>
-      <v-text-field label="protein conc. (mg/mL)" v-model="labelModel.protein_conc_mgmL" density="compact"></v-text-field>
+      <v-text-field label="protein conc. (mg/mL)" v-model="labelModel.protein_conc_mgmL"
+        density="compact"></v-text-field>
       <v-text-field label="date" v-model="labelModel.date" density="compact"></v-text-field>
       <v-text-field label="volume (µL)" v-model="labelModel.volume" density="compact"></v-text-field>
       <v-text-field label="author" v-model="labelModel.author" density="compact"></v-text-field>
@@ -18,20 +19,18 @@
       <div class="sheet-title">Preview label</div>
       <v-divider class="mb-2"></v-divider>
       <div class="preview-label-container">
-      <print-label :model="labelModel" class="preview-label"></print-label>
-      <v-btn color="primary" @click="print_func">Print</v-btn>
+        <print-label :model="labelModel" class="preview-label"></print-label>
+        <v-btn color="primary" @click="print_func">Print</v-btn>
       </div>
-      
+
     </v-sheet>
-
-    <div class="print-page">
-      <template v-for="n in 162">
-        <print-label :model="labelModel"></print-label>
-
-      </template>
-
-    </div>
   </v-container>
+  <div class="print-page">
+    <template v-for="n in 120">
+      <print-label :model="labelModel"></print-label>
+    </template>
+
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -64,7 +63,7 @@ const labelModel = ref<{
 
 });
 
-const print_func = () => {window.print()}
+const print_func = () => { window.print() }
 </script>
 
 
@@ -76,31 +75,26 @@ const print_func = () => {window.print()}
 @media print {
   @page {
     size: a4;
+    margin:10mm;
   }
 
-  body {
-    visibility: hidden;
+  .page-container{
+    display: none!important;
   }
 
   .print-page {
-    height: 297mm;
-    width: 210mm;
-    visibility: visible;
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 34mm);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    /*  display: grid;
+    grid-template-columns: repeat(5, 34mm);
     grid-auto-rows: 11mm;
     row-gap: 0mm;
     column-gap: 0mm;
-  }
-
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+    margin:0;
+    page-break-inside: auto;
+    border: 1px solid red; */
   }
 
 
@@ -129,8 +123,8 @@ const print_func = () => {window.print()}
 }
 
 
-.sheet-title{
-  font-size:x-large;
+.sheet-title {
+  font-size: x-large;
   padding: 0.5em;
 }
 </style>

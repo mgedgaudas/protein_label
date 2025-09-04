@@ -10,7 +10,6 @@ import { fileURLToPath, URL } from 'node:url'
 
 
 
-console.log(process.env.j)
 // https://vitejs.dev/config/
 
 export default ({ mode }) => {
