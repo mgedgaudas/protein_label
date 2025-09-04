@@ -5,13 +5,20 @@ import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import Fonts from 'unplugin-fonts/vite'
 
 // Utilities
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv  } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
+
+
+console.log(process.env.j)
 // https://vitejs.dev/config/
-export default defineConfig({
+
+export default ({ mode }) => {
+process.env = {...process.env, ...loadEnv(mode, process.cwd())};
+
+return defineConfig({
   base: '',
-  build:{outDir: "./docs"},
+  build:{outDir: process.env.VITE_BUILD_LOCATION || "./docs"},
   plugins: [
     Vue({
       template: { transformAssetUrls },
@@ -63,3 +70,4 @@ export default defineConfig({
     },
   },
 })
+}
