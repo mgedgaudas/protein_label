@@ -3,14 +3,15 @@
     <v-sheet border class="info-sheet">
       <div class="sheet-title">Sample information</div>
       <v-divider class="mb-2"></v-divider>
-      <v-text-field label="protein" v-model="labelModel.protein"></v-text-field>
-      <v-text-field label="plasmid" v-model="labelModel.plasmid"></v-text-field>
-      <v-text-field label="protein conc. (µM)" v-model="labelModel.protein_conc_uM"></v-text-field>
-      <v-text-field label="protein conc. (mg/mL)" v-model="labelModel.protein_conc_mgmL"></v-text-field>
-      <v-text-field label="date" v-model="labelModel.date"></v-text-field>
-      <v-text-field label="volume (µL)" v-model="labelModel.volume"></v-text-field>
-      <v-text-field label="author" v-model="labelModel.author"></v-text-field>
-      <v-textarea label="buffer" v-model="labelModel.buffer"></v-textarea>
+      <v-text-field label="protein" v-model="labelModel.protein" density="compact"></v-text-field>
+      <v-text-field label="plasmid" v-model="labelModel.plasmid" density="compact"></v-text-field>
+      <v-text-field label="Protein batch" v-model="labelModel.protein_batch" density="compact"></v-text-field>
+      <v-text-field label="protein conc. (µM)" v-model="labelModel.protein_conc_uM" density="compact"></v-text-field>
+      <v-text-field label="protein conc. (mg/mL)" v-model="labelModel.protein_conc_mgmL" density="compact"></v-text-field>
+      <v-text-field label="date" v-model="labelModel.date" density="compact"></v-text-field>
+      <v-text-field label="volume (µL)" v-model="labelModel.volume" density="compact"></v-text-field>
+      <v-text-field label="author" v-model="labelModel.author" density="compact"></v-text-field>
+      <v-textarea label="buffer" v-model="labelModel.buffer" density="compact"></v-textarea>
     </v-sheet>
     <!-- <print-label :model="labelModel" class="preview-label"></print-label> -->
     <v-sheet border class="preview-label-sheet">
