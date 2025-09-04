@@ -25,7 +25,7 @@
     </v-sheet>
 
     <div class="print-page">
-      <template v-for="n in 168">
+      <template v-for="n in 162">
         <print-label :model="labelModel"></print-label>
 
       </template>
