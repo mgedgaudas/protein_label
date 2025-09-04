@@ -2,6 +2,7 @@
 /node_modules
 /public
 /src
+/.vite
 
 # local env files
 .env.local
