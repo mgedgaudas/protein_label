@@ -1,5 +1,8 @@
 <template>
   <v-container class="page-container" max-width="900">
+    <v-sheet border class="info-title">
+      <div class="sheet-title">BVTS protein sample label</div>
+    </v-sheet>
     <v-sheet border class="info-sheet">
       <div class="sheet-title">Sample information</div>
       <v-divider class="mb-2"></v-divider>
@@ -20,13 +23,30 @@
       <v-divider class="mb-2"></v-divider>
       <div class="preview-label-container">
         <print-label :model="labelModel" class="preview-label"></print-label>
-        <v-btn color="primary" @click="print_func">Print</v-btn>
+        <v-btn color="primary" variant="flat" @click="print_func">Print</v-btn>
       </div>
 
     </v-sheet>
+    <v-sheet border class="print-settings">
+      <div class="sheet-title">Printing settings</div>
+      <v-divider class="mb-2"></v-divider>
+       <v-text-field label="Label count" v-model.number="printModel.labelCount" density="compact"></v-text-field>
+       <v-slider label="Font scale" v-model="labelModel.fontsize_scale" :min="20" :max="150" :step="5" thumb-label>
+        <template v-slot:append>
+          <v-text-field
+            v-model.number="labelModel.fontsize_scale"
+            density="compact"
+            style="width: 80px"
+            type="number"
+            variant="outlined"
+            hide-details
+          ></v-text-field>
+        </template>
+       </v-slider>
+    </v-sheet>
   </v-container>
   <div class="print-page">
-    <template v-for="n in 120">
+    <template v-for="n in printModel.labelCount">
       <print-label :model="labelModel"></print-label>
     </template>
 
@@ -36,6 +56,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import PrintLabel from './PrintLabel.vue';
+
+
+const printModel = ref({
+  labelCount: 120,
+})
 
 
 const labelModel = ref<{
@@ -48,18 +73,18 @@ const labelModel = ref<{
   volume: string;
   author: string;
   buffer: string;
-  fontsize_mm: number;
+  fontsize_scale: number;
 }>({
   protein: "chCAIII",
-  plasmid: "pL0194",
+  plasmid: "pL00XX",
   protein_conc_uM: 25.9,
   protein_conc_mgmL: 0.76,
-  protein_batch: "PB-AM0101",
-  date: "2025-09-03",
+  protein_batch: "PB-XX00YY",
+  date: (new Date()).toISOString().split('T')[0],
   volume: "500",
-  author: "AM",
+  author: "ABC",
   buffer: "pH 6.2\n20 mM MES\n50 mM NaCl\n2 mM DTT",
-  fontsize_mm: 1.8,
+  fontsize_scale: 100,
 
 });
 
@@ -87,6 +112,7 @@ const print_func = () => { window.print() }
     flex-wrap: wrap;
     justify-content: flex-start;
     align-content: flex-start;
+    page-break-inside: auto;
     /*  display: grid;
     grid-template-columns: repeat(5, 34mm);
     grid-auto-rows: 11mm;
@@ -101,7 +127,7 @@ const print_func = () => { window.print() }
 }
 
 .preview-label-sheet {
-  grid-area: "preview-label-sheet";
+  grid-area: preview-label-sheet;
   align-self: start;
   height: auto;
 }
@@ -112,16 +138,26 @@ const print_func = () => { window.print() }
 }
 
 .info-sheet {
-  grid-area: "info-sheet";
+  grid-area: info-sheet;
+}
+
+.print-settings{
+  grid-area: print-settings;
 }
 
 .page-container {
   display: grid;
-  grid-template: "info-sheet preview-label-sheet";
-  grid-column: 1fr 1fr;
+  grid-template-areas: 
+  "info-title info-title"
+  "info-sheet preview-label-sheet"
+  "info-sheet print-settings";
   grid-column-gap: 1em;
+  row-gap: 1em;
 }
 
+.info-title{
+  grid-area: info-title;
+}
 
 .sheet-title {
   font-size: x-large;

@@ -27,13 +27,13 @@ const props = defineProps<{
         volume: string;
         author: string;
         buffer: string;
-        fontsize_mm: number;
+        fontsize_scale: number;
     }
 
 }>();
 
 
-const fontsize=computed(() => `${props.model.fontsize_mm}mm`)
+const fontsize=computed(() => `${props.model.fontsize_scale/100*1.8}mm`)
 </script>
 
 <style lang="css" scoped>
@@ -46,6 +46,7 @@ const fontsize=computed(() => `${props.model.fontsize_mm}mm`)
   line-height: v-bind(fontsize);
   display: flex;
   flex-direction: row;
+  break-inside: avoid;
 }
 
 .label-info {
