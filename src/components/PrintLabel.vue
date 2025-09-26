@@ -1,5 +1,5 @@
 <template>
-    <div class="label">
+    <div class="label barlow-medium">
         <div class="label-info">
             <div>{{ model.protein }} ({{ model.plasmid }})</div>
             <div>{{ model.protein_conc_uM }} µM | {{ model.protein_conc_mgmL }} mg/mL</div>
@@ -64,5 +64,11 @@ const fontsize=computed(() => `${props.model.fontsize_scale/100*1.8}mm`)
 .label-buffer{
     padding-left: 1mm;
     text-align: start;
+}
+
+.barlow-medium {
+  font-family: "Barlow", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 </style>
