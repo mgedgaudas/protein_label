@@ -63,6 +63,10 @@ const printFunction = () => print();
           <label for="in_label">Author</label>
         </FloatLabel>
         <FloatLabel variant="in">
+          <InputText id="in_label" v-model="labelModel.date" variant="filled" />
+          <label for="in_label">Date</label>
+        </FloatLabel>
+        <FloatLabel variant="in">
           <Textarea id="in_label" v-model="labelModel.buffer" autoResize variant="filled" />
           <label for="in_label">Buffer</label>
         </FloatLabel>
