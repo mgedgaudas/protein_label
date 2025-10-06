@@ -1,23 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import PrintLabel from './components/PrintLabel.vue';
+import type { LabelInfo } from './utils';
 
 const printModel = ref({
   labelCount: 115,
 })
 
-const labelModel = ref<{
-  protein: string;
-  plasmid: string;
-  protein_conc_uM: number;
-  protein_conc_mgmL: number;
-  protein_batch: string;
-  date: string;
-  volume: string;
-  author: string;
-  buffer: string;
-  fontsize_scale: number;
-}>({
+const labelModel = ref<LabelInfo>({
   protein: "chCAIII",
   plasmid: "pL00XX",
   protein_conc_uM: 25.9,
@@ -56,17 +46,17 @@ const printFunction = () => print();
         </FloatLabel>
 
         <FloatLabel variant="in">
-          <InputNumber id="in_label" v-model.number="labelModel.protein_conc_uM" variant="filled" />
-          <label for="in_label">Protein conc. (µM)</label>
+          <InputNumber id="in_label" v-model.number="labelModel.protein_conc_uM" :maxFractionDigits="2" suffix="  µM" variant="filled" />
+          <label for="in_label">Protein conc.</label>
         </FloatLabel>
         <FloatLabel variant="in">
-          <InputNumber id="in_label" v-model.number="labelModel.protein_conc_mgmL" variant="filled" />
-          <label for="in_label">Protein conc. (mg/mL)</label>
+          <InputNumber id="in_label" v-model.number="labelModel.protein_conc_mgmL" :maxFractionDigits="2" suffix="  mg/mL" variant="filled" />
+          <label for="in_label">Protein conc.</label>
         </FloatLabel>
 
         <FloatLabel variant="in">
-          <InputText id="in_label" v-model="labelModel.volume" variant="filled" />
-          <label for="in_label">volume (µL)</label>
+          <InputText id="in_label" v-model="labelModel.volume" suffix="  µL"  variant="filled" />
+          <label for="in_label">volume</label>
         </FloatLabel>
         <FloatLabel variant="in">
           <InputText id="in_label" v-model="labelModel.author" variant="filled" />
@@ -88,7 +78,7 @@ const printFunction = () => print();
       <template #title>Print settings</template>
       <template #content>
         <FloatLabel variant="in">
-          <InputNumber v-model="printModel.labelCount" inputId="in_label"
+          <InputNumber v-model="printModel.labelCount" showButtons inputId="in_label"
             variant="filled" />
           <label for="in_label">Label count</label>
         </FloatLabel>
